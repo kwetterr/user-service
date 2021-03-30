@@ -6,7 +6,7 @@
 REST-API for managing Kwetter users.
 
 <b>Techstack:</b>
-- .NET CORE REST API
+- .NET CORE 3.1
 - MSSQL-database
 
 ## Getting Started
