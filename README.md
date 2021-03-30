@@ -16,14 +16,14 @@ docker-compose up
 
 ## Public Interface
 | Endpoint        | Method | Endpoint           | Permission       |
-|-----------------| -------| ------------------ | ---------------- |
-| Authorize       | POST   | /authorize         | User             |
-| Get All         | GET    | /users             | User             |
-| Create          | POST   | /users/create      | None             |
-| Get             | GET    | /users/{id}        | User             |
-| Update          | PUT    | /users/{id}        | User             |
-| Delete          | DELETE | /users/delete/{id} | Moderator, Admin |
-| Update Role     | PUT    | /roles/update/{id} | Admin            |
+|-----------------| -------| -------------------- | ---------------- |
+| `Authorize`       | POST   | `/authorize`         | User             |
+| `Get All`         | GET    | `/users`             | User             |
+| `Create`          | POST   | `/users/create`      | None             |
+| `Get`             | GET    | `/users/{id}`        | User             |
+| `Update`          | PUT    | `/users/{id}`        | User             |
+| `Delete`          | DELETE | `/users/delete/{id}` | Moderator, Admin |
+| `Update Role`     | PUT    | `/roles/update/{id}` | Admin            |
 
 
 ### Note
