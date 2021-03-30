@@ -52,7 +52,7 @@ If the directory `/Migrations` doesn't exist or doesn't container `.cs`, `.Desig
 
 ```zsh
 #zsh
-dotnet ef migrations add Initial
+dotnet ef migrations add Initial --project src/kwetter-authentication.csproj
 ```
 
 ### Sources
@@ -61,3 +61,4 @@ dotnet ef migrations add Initial
 - [Entity Framework](https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-5.0)
 - [JWT](https://jasonwatmore.com/post/2019/10/11/aspnet-core-3-jwt-authentication-tutorial-with-example-api#app-settings-development-json)
 - [SonarScanner](https://pumpingco.de/blog/how-to-run-a-sonarcloud-scan-during-docker-builds-for-dotnet-core/)
+- [Entity Enums](https://medium.com/agilix/entity-framework-core-enums-ee0f8f4063f2)

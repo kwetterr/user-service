@@ -4,21 +4,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace kwetter_authentication
 {
-    public class ApplicationContext : DbContext
+  public class ApplicationContext : DbContext
+  {
+    public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
     {
-        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
-        {
-          
-        }
 
-        public DbSet<User> Users { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<User>().ToTable("User");
-            modelBuilder.Entity<User>().HasData(
-              new { Id = 1, FirstName="Aron", LastName = "Andriy", Username = "AronH", Password="asdf" },
-              new { Id = 2, FirstName="Aron2", LastName = "Andriy2", Username = "AronH2", Password="asdf2" });
-        }
     }
+
+    public DbSet<User> Users { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+      modelBuilder.Entity<User>().ToTable("User");
+      modelBuilder.Entity<User>()
+        .Property(u => u.Role)
+        .HasConversion<string>();
+
+      // Load data.
+      modelBuilder.Entity<User>().HasData(
+        new User { Id = 1234, Username = "AronKwats", Name = "Aron Heesakkers", Email = "aron@email.com", Password = "asdf", Role = Role.ADMIN },
+        new User { Id = 12345, Username = "AronKwats", Name = "Aron Heesakkers", Email = "aron@email.com", Password = "asdf", Role = Role.ADMIN });
+    }
+  }
 }

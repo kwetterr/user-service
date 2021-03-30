@@ -36,6 +36,7 @@ namespace kwetter_authentication.Controllers
       {
         return BadRequest(new { message = e.ToString() });
       }
+
     }
 
     [Authorize]
@@ -52,7 +53,7 @@ namespace kwetter_authentication.Controllers
       return Ok(_context.Users);
     }
 
-
+s
     [HttpPost("create")]
     public IActionResult Create(CreateRequest dto)
     {
@@ -60,10 +61,14 @@ namespace kwetter_authentication.Controllers
       {
         var user = new Models.User() 
         { 
-          FirstName = dto.Username,
-          LastName = dto.LastName, 
-          Username = dto.Username, 
-          Password = dto.Password 
+            // Id = Guid.NewGuid().ToString();
+            Username = dto.Username,
+            Name = dto.Name,
+            Email = dto.Email,
+            Country = dto.Country,
+            Biography = dto.Biography,
+            Avatar = dto.Avatar,
+            Role = Models.Role.USER,
         };
         var u = _context.Users.Add(user);
         _context.SaveChanges();

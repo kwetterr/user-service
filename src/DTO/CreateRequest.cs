@@ -5,16 +5,19 @@ namespace kwetter_authentication.DTO
 {
   public class CreateRequest
   {
-    [Required]
-    public string FirstName { get; set; }
-
-    [Required]
-    public string LastName { get; set; }
-
+    public int Id { get; set; }
     [Required]
     public string Username { get; set; }
+    [Required]
+    public string Name { get; set; }
+    [Required]
+    public string Email { get; set; }
+    public string Country { get; set; } = "";
+    public string Biography { get; set; } = "";
+    public string Avatar { get; set; } = "";
 
     [Required]
     public string Password { get; set; }
+
   }
 }

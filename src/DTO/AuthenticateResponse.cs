@@ -5,20 +5,27 @@ namespace kwetter_authentication.DTO
 {
     public class AuthenticateResponse
     {
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Username { get; set; }
-        public string Token { get; set; }
+    public int Id { get; set; }
+    public string Username { get; set; }
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public string Country { get; set; }
+    public string Biography { get; set; }
+    public string Avatar { get; set; }
+
+    public string Role { get; set; }
 
 
         public AuthenticateResponse(User user, string token)
         {
             Id = user.Id;
-            FirstName = user.FirstName;
-            LastName = user.LastName;
             Username = user.Username;
-            Token = token;
+            Name = user.Name;
+            Email = user.Email;
+            Country = user.Country;
+            Biography = user.Biography;
+            Avatar = user.Avatar;
+            Role = user.Role.ToString();
         }
     }
 }

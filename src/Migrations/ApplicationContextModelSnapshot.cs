@@ -15,7 +15,7 @@ namespace kwetter_authentication.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.3")
+                .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("kwetter_authentication.Models.User", b =>
@@ -25,13 +25,26 @@ namespace kwetter_authentication.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("Avatar")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastName")
+                    b.Property<string>("Biography")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
@@ -44,19 +57,21 @@ namespace kwetter_authentication.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            FirstName = "Aron",
-                            LastName = "Andriy",
+                            Id = 1234,
+                            Email = "aron@email.com",
+                            Name = "Aron Heesakkers",
                             Password = "asdf",
-                            Username = "AronH"
+                            Role = "ADMIN",
+                            Username = "AronKwats"
                         },
                         new
                         {
-                            Id = 2,
-                            FirstName = "Aron2",
-                            LastName = "Andriy2",
-                            Password = "asdf2",
-                            Username = "AronH2"
+                            Id = 12345,
+                            Email = "aron@email.com",
+                            Name = "Aron Heesakkers",
+                            Password = "asdf",
+                            Role = "ADMIN",
+                            Username = "AronKwats"
                         });
                 });
 #pragma warning restore 612, 618
