@@ -1,0 +1,54 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
+
+ARG SONAR_PROJECT_KEY
+ARG SONAR_HOST_URL
+ARG SONAR_TOKEN
+
+ENV SONAR_PROJECT_KEY ${SONAR_PROJECT_KEY}
+ENV SONAR_HOST_URL ${SONAR_HOST_URL}
+ENV SONAR_TOKEN ${SONAR_TOKEN}
+
+RUN apt-get update && apt-get install -y openjdk-11-jdk
+
+WORKDIR /app
+
+# Install Sonar Scanner, Coverlet and Java (required for Sonar Scanner) 
+# Documentation: https://pumpingco.de/blog/how-to-run-a-sonarcloud-scan-during-docker-builds-for-dotnet-core/
+# Commented coverlet because 3.0.0 is incompatible with .NET CORE 3.1
+# Add .NET Core SDK tools
+RUN export PATH="$PATH:/root/.dotnet/tools"
+
+RUN dotnet tool install --global dotnet-sonarscanner
+# RUN dotnet tool install --global coverlet.console
+ENV PATH="$PATH:/root/.dotnet/tools"
+
+# # Start Sonar Scanner
+RUN dotnet sonarscanner begin \
+  /k:"$SONAR_PROJECT_KEY" \
+  /d:sonar.host.url="$SONAR_HOST_URL" \
+  /d:sonar.login="$SONAR_TOKEN"
+#   # /d:sonar.cs.opencover.reportsPaths=/coverage.opencover.xml
+
+# Restory and copy proj.
+COPY *.csproj ./
+RUN dotnet restore
+COPY . ./
+
+# Copy everythhing else and build.
+RUN dotnet publish -c Release -o out
+# RUN dotnet test \
+#   /p:CollectCoverage=true \
+#   /p:CoverletOutputFormat=opencover \
+#   /p:CoverletOutput="/coverage"
+
+# End Sonar Scanner
+RUN dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
+
+# Build runtime image.
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+WORKDIR /app
+COPY --from=build-env /app/out .
+EXPOSE 5000
+
+# Start application
+ENTRYPOINT ["dotnet", "kwetter-authentication.dll"]
