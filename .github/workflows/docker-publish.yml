@@ -14,7 +14,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: kwetterr/kwat-service
+          repository: kwetterr/user-service
           tag_with_ref: true
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v1
