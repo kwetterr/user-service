@@ -14,6 +14,18 @@ docker-compose build
 docker-compose up
 ```
 
+## Public Interface
+| Endpoint        | Method | Endpoint           | Permission       |
+|-----------------| -------| ------------------ | ---------------- |
+| Authorize       | POST   | /authorize         | User             |
+| Get All         | GET    | /users             | User             |
+| Create          | POST   | /users/create      | None             |
+| Get             | GET    | /users/{id}        | User             |
+| Update          | PUT    | /users/{id}        | User             |
+| Delete          | DELETE | /users/delete/{id} | Moderator, Admin |
+| Update Role     | PUT    | /roles/update/{id} | Admin            |
+
+
 ### Note
 If the directory `/Migrations` doesn't exist or doesn't container `.cs`, `.Designer.cs`, and a `Snapshot.cs` run the following to create these files. 
 
@@ -22,10 +34,15 @@ If the directory `/Migrations` doesn't exist or doesn't container `.cs`, `.Desig
 dotnet ef migrations add Initial
 ```
 
-### Build local SonarQube and run .NET with Docker
+### Analyze with a local SonarQube server
 The .NET CORE Docker build contains a SonarScanner (see `./Dockerfile.sonar`). This is why SonarQube needs to be started.
 
-Checkout [this SonarQube snippet](https://gist.github.com/ShadyDL/814b6a6514fd3a89dcbe2b227afd5b4c) with a full explanation.
+Checkout [this SonarQube snippet](https://gist.github.com/ShadyDL/814b6a6514fd3a89dcbe2b227afd5b4c) I made with a full explanation.
+
+```zsh
+#zsh
+docker run -d --name sonarqube --memory=5g -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000:9000 sonarqube:latest
+```
 
 ```zsh
 #zsh
@@ -33,11 +50,6 @@ Checkout [this SonarQube snippet](https://gist.github.com/ShadyDL/814b6a6514fd3a
   --build-arg SONAR_PROJECT_KEY="auth" \
   --build-arg SONAR_HOST_URL="http://localhost:9000" \
   --build-arg SONAR_TOKEN="${TOKEN}"  --network=host .
-```
-
-```zsh
-#zsh
-docker run -d --name sonarqube --memory=5g -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000:9000 sonarqube:latest
 ```
 
 ### Sources

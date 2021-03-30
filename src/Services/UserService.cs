@@ -22,7 +22,7 @@ namespace kwetter_authentication.Services
         public UserService(IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
-            _users = new() { new User { Id = 1, FirstName = "Test", LastName = "User", Username = "test", Password = "test" } };
+            _users = new() { new User { Id = 1, FirstName = "Test", LastName = "User", Username = "test", Password = _appSettings.MockUserPassword }};
         }
 
         public AuthenticateResponse Authenticate(AuthenticateRequest model)

@@ -49,10 +49,6 @@ namespace kwetter_authentication.Controllers
     [HttpGet("getnew")]
     public IActionResult GetAllNew()
     {
-      //  var user = new Models.User() { Id = 4, FirstName="asdf", LastName = "fdsa", Username = "asdf", Password="asdf" };
-
-      //   _context.Users.Add(user);
-      //   _context.SaveChanges();
       return Ok(_context.Users);
     }
 
