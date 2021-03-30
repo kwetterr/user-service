@@ -4,33 +4,17 @@
 
 # user-service
 Manages users.
+- .NET CORE
+- MSSQL database
 
 ## Getting Started
-Choose one of these three options:
-- Run with dotnet CLI.
-- Run in container.
-- Run in container with MSSQL-dabase.
 
-### Dotnet CLI
-```zsh
-dotnet restore
-dotnet build
-dotnet run
-```
-
-### Run only the docker container
-```zsh
-  docker run -d -p 5000:5000 --name kwetter-auth-service kwetter-auth
-```
-
-### Run with Docker and MSSQL-Server 
-- Should only be used for development.
 ```zsh
 docker-compose build
 docker-compose up
 ```
 
-#### Note
+### Note
 If the directory `/Migrations` doesn't exist or doesn't container `.cs`, `.Designer.cs`, and a `Snapshot.cs` run the following to create these files. 
 
 ```zsh
@@ -48,7 +32,7 @@ Checkout [this SonarQube snippet](https://gist.github.com/ShadyDL/814b6a6514fd3a
  docker build -f Dockerfile.sonar kwetter-auth \
   --build-arg SONAR_PROJECT_KEY="auth" \
   --build-arg SONAR_HOST_URL="http://localhost:9000" \
-  --build-arg SONAR_TOKEN="5ba21b41aa11616d264b914f3bd44c338847d79c"  --network=host .
+  --build-arg SONAR_TOKEN="${TOKEN}"  --network=host .
 ```
 
 ```zsh
