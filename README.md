@@ -3,9 +3,11 @@
 ![bagde](https://github.com/kwetterr/user-service/actions/workflows/docker-publish.yml/badge.svg)
 
 # user-service
-Manages users.
-- .NET CORE
-- MSSQL database
+REST-API for managing Kwetter users.
+
+<b>Techstack:</b>
+- .NET CORE REST API
+- MSSQL-database
 
 ## Getting Started
 
@@ -25,15 +27,6 @@ docker-compose up
 | `Delete`          | `DELETE` | `/users/delete/{id}` | `Moderator, Admin` |
 | `Update Role`     | `PUT`    | `/roles/update/{id}` | `Admin`            |
 
-
-### Note
-If the directory `/Migrations` doesn't exist or doesn't container `.cs`, `.Designer.cs`, and a `Snapshot.cs` run the following to create these files. 
-
-```zsh
-#zsh
-dotnet ef migrations add Initial
-```
-
 ### Analyze with a local SonarQube server
 The .NET CORE Docker build contains a SonarScanner (see `./Dockerfile.sonar`). This is why SonarQube needs to be started.
 
@@ -50,6 +43,14 @@ docker run -d --name sonarqube --memory=5g -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=
   --build-arg SONAR_PROJECT_KEY="auth" \
   --build-arg SONAR_HOST_URL="http://localhost:9000" \
   --build-arg SONAR_TOKEN="${TOKEN}"  --network=host .
+```
+
+### Issues
+If the directory `/Migrations` doesn't exist or doesn't container `.cs`, `.Designer.cs`, and a `Snapshot.cs` run the following to create these files. 
+
+```zsh
+#zsh
+dotnet ef migrations add Initial
 ```
 
 ### Sources
