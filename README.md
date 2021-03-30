@@ -16,16 +16,6 @@ docker-compose build
 docker-compose up
 ```
 
-## Public Interface
-| Endpoint          | Method   | Endpoint             | Permission       |
-|-------------------| ---------| -------------------- | ------------------ |
-| `Authorize`       | `POST`   | `/authorize`         | `User`             |
-| `Get All`         | `GET`    | `/users`             | `User`             |
-| `Create`          | `POST`   | `/users/create`      | `None`             |
-| `Get`             | `GET`    | `/users/{id}`        | `User`             |
-| `Update`          | `PUT`    | `/users/{id}`        | `User`             |
-| `Delete`          | `DELETE` | `/users/delete/{id}` | `Moderator, Admin` |
-| `Update Role`     | `PUT`    | `/roles/update/{id}` | `Admin`            |
 
 ### Analyze with a local SonarQube server
 The .NET CORE Docker build contains a SonarScanner (see `./Dockerfile.sonar`). This is why SonarQube needs to be started.
@@ -44,6 +34,18 @@ docker run -d --name sonarqube --memory=5g -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=
   --build-arg SONAR_HOST_URL="http://localhost:9000" \
   --build-arg SONAR_TOKEN="${TOKEN}"  --network=host .
 ```
+
+## Public Interface
+| Endpoint          | Method   | Endpoint             | Permission       |
+|-------------------| ---------| -------------------- | ------------------ |
+| `Authorize`       | `POST`   | `/authorize`         | `User`             |
+| `Get All`         | `GET`    | `/users`             | `User`             |
+| `Create`          | `POST`   | `/users/create`      | `None`             |
+| `Get`             | `GET`    | `/users/{id}`        | `User`             |
+| `Update`          | `PUT`    | `/users/{id}`        | `User`             |
+| `Delete`          | `DELETE` | `/users/delete/{id}` | `Moderator, Admin` |
+| `Update Role`     | `PUT`    | `/roles/update/{id}` | `Admin`            |
+
 
 ### Issues
 If the directory `/Migrations` doesn't exist or doesn't container `.cs`, `.Designer.cs`, and a `Snapshot.cs` run the following to create these files. 
