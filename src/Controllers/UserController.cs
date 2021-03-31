@@ -58,6 +58,7 @@ namespace kwetter_authentication.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("/{id}")]
         public IActionResult Get(string id)
         {
@@ -73,6 +74,7 @@ namespace kwetter_authentication.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut("/{id}")]
         public IActionResult Update(string id, UpdateRequest request)
         {
@@ -88,6 +90,7 @@ namespace kwetter_authentication.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("/{id}")]
         public IActionResult Delete(string id)
         {
@@ -102,6 +105,7 @@ namespace kwetter_authentication.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("/{id}")]
         public IActionResult UpdateRole(string id)
         {
