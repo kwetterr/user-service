@@ -5,16 +5,15 @@ namespace kwetter_authentication.DTO
 {
     public class AuthenticateResponse
     {
-    public string Id { get; set; }
-    public string Username { get; set; }
-    public string Name { get; set; }
-    public string Email { get; set; }
-    public string Country { get; set; }
-    public string Biography { get; set; }
-    public string Avatar { get; set; }
-
-    public string Role { get; set; }
-
+        public string Id { get; set; }
+        public string Username { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Country { get; set; }
+        public string Biography { get; set; }
+        public string Avatar { get; set; }
+        public string Role { get; set; }
+        public string Token { get; set; }
 
         public AuthenticateResponse(User user, string token)
         {
@@ -26,6 +25,7 @@ namespace kwetter_authentication.DTO
             Biography = user.Biography;
             Avatar = user.Avatar;
             Role = user.Role.ToString();
+            Token = token;
         }
     }
 }

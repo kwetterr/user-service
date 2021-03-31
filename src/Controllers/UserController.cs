@@ -1,5 +1,6 @@
 ﻿using System;
 using kwetter_authentication.DTO;
+using kwetter_authentication.Helpers;
 using kwetter_authentication.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,6 +35,7 @@ namespace kwetter_authentication.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetAll()
         {
