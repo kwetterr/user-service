@@ -21,7 +21,7 @@ namespace kwetter_authentication
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>()
-                    .UseUrls("http://*:5000"); //Add this line
+                    .UseUrls("http://*:5000");
                 });
     }
 }
