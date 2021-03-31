@@ -2,7 +2,7 @@
 ![bagde](https://github.com/kwetterr/user-service/actions/workflows/build.yml/badge.svg)
 ![bagde](https://github.com/kwetterr/user-service/actions/workflows/docker-publish.yml/badge.svg)
 
-# user-service
+# :sparkles: user-service :sparkles:
 REST-API for managing Kwetter users.
 
 <b>Techstack:</b>
