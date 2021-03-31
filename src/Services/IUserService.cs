@@ -8,7 +8,11 @@ namespace kwetter_authentication.Services
     public interface IUserService
     {
         AuthenticateResponse Authenticate(AuthenticateRequest model);
-        IEnumerable<User> GetAll();
+        User Create(CreateRequest user);
         User GetById(string id);
+        User UpdateUser(string id, UpdateRequest req);
+        void DeleteById(string id);
+        User UpdateRole(string id, string role);
+        IEnumerable<User> GetAll();
     }
 }

@@ -17,10 +17,9 @@ namespace kwetter_authentication.Services
         private readonly AppSettings _appSettings;
         private readonly ApplicationContext _context;
 
-
-        public UserService(IOptions<AppSettings> appSettings, ApplicationContext context)
+        public UserService(IOptions<AppSettings> options, ApplicationContext context)
         {
-            _appSettings = appSettings.Value;
+            _appSettings = options.Value;
             _context = context;
         }
 
@@ -37,6 +36,32 @@ namespace kwetter_authentication.Services
             return new AuthenticateResponse(user, token);
         }
 
+        public User Create(CreateRequest req)
+        {
+            var res = _context.Users.Add(
+                new User()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Username = req.Username,
+                    Name = req.Name,
+                    Email = req.Email,
+                    Country = req.Country,
+                    Biography = req.Biography,
+                    Avatar = req.Avatar,
+                    Role = Role.USER,
+                }
+            );
+            _context.SaveChanges();
+            return res.Entity;
+        }
+
+        public void DeleteById(string id)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Id == id);
+            _context.Remove(user);
+            _context.SaveChanges();
+        }
+
         public IEnumerable<User> GetAll()
         {
             return _context.Users;
@@ -47,7 +72,33 @@ namespace kwetter_authentication.Services
             return _context.Users.FirstOrDefault(x => x.Id == id);
         }
 
-        // helper methods
+        public User UpdateRole(string id, string role)
+        {
+            try
+            {
+                var user = _context.Users.FirstOrDefault(u => u.Id == id);
+                user.Role = (Role)Enum.Parse((typeof(Role)), role);
+                _context.SaveChanges();
+                return user;
+            }
+            catch
+            {
+                throw new ArgumentException("Role doesn't exist");
+            }
+        }
+
+        public User UpdateUser(string id, UpdateRequest req)
+        {
+            var user = _context.Users.FirstOrDefault(x => x.Id == id);
+            user.Biography = req.Biography;
+            user.Avatar = req.Avatar;
+            user.Country = req.Country;
+            user.Email = req.Email;
+            user.Name = req.Name;
+            user.Password = req.Password;
+            _context.SaveChanges();
+            return user;
+        }
 
         private string GenerateJwtToken(User user)
         {

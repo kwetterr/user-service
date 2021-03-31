@@ -62,3 +62,4 @@ dotnet ef migrations add Initial --project src/kwetter-authentication.csproj
 - [JWT](https://jasonwatmore.com/post/2019/10/11/aspnet-core-3-jwt-authentication-tutorial-with-example-api#app-settings-development-json)
 - [SonarScanner](https://pumpingco.de/blog/how-to-run-a-sonarcloud-scan-during-docker-builds-for-dotnet-core/)
 - [Entity Enums](https://medium.com/agilix/entity-framework-core-enums-ee0f8f4063f2)
+- [Case against Repository Pattern](https://www.thereformedprogrammer.net/is-the-repository-pattern-useful-with-entity-framework-core/)
