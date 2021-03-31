@@ -42,7 +42,7 @@ namespace kwetter_authentication.Services
             return _context.Users;
         }
 
-        public User GetById(int id)
+        public User GetById(string id)
         {
             return _context.Users.FirstOrDefault(x => x.Id == id);
         }

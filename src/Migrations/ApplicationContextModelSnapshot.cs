@@ -20,10 +20,8 @@ namespace kwetter_authentication.Migrations
 
             modelBuilder.Entity("kwetter_authentication.Models.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Avatar")
                         .HasColumnType("nvarchar(max)");
@@ -57,7 +55,7 @@ namespace kwetter_authentication.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1234,
+                            Id = "feabb8fb-6d8c-48a4-b060-e02c66b25405",
                             Email = "aron@email.com",
                             Name = "Aron Heesakkers",
                             Password = "asdf",
@@ -66,12 +64,39 @@ namespace kwetter_authentication.Migrations
                         },
                         new
                         {
-                            Id = 12345,
-                            Email = "aron@email.com",
-                            Name = "Aron Heesakkers",
+                            Id = "c30fa353-d4e2-4b72-bbcf-0cd963763316",
+                            Email = "jaap@email.com",
+                            Name = "Jaap van der Meer",
                             Password = "asdf",
-                            Role = "ADMIN",
-                            Username = "AronKwats"
+                            Role = "MODERATOR",
+                            Username = "Jaapie98"
+                        },
+                        new
+                        {
+                            Id = "25853618-ef7b-44e8-aec2-bc7dae97498b",
+                            Email = "sverre@email.com",
+                            Name = "Sverre van Gompel",
+                            Password = "asdf",
+                            Role = "USER",
+                            Username = "SverrieBoy"
+                        },
+                        new
+                        {
+                            Id = "61e1b100-6626-4aa0-b15b-53a1fe5503ec",
+                            Email = "tim@email.com",
+                            Name = "Tim la Haije",
+                            Password = "asdf",
+                            Role = "USER",
+                            Username = "Timothy"
+                        },
+                        new
+                        {
+                            Id = "5685180c-a18e-4fc9-9d79-985f85b8fc1d",
+                            Email = "dirk@email.com",
+                            Name = "Dirk van de Waerden",
+                            Password = "asdf",
+                            Role = "USER",
+                            Username = "Dirkvdw"
                         });
                 });
 #pragma warning restore 612, 618

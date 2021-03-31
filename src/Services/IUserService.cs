@@ -9,6 +9,6 @@ namespace kwetter_authentication.Services
     {
         AuthenticateResponse Authenticate(AuthenticateRequest model);
         IEnumerable<User> GetAll();
-        User GetById(int id);
+        User GetById(string id);
     }
 }

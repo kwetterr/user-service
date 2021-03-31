@@ -10,8 +10,7 @@ namespace kwetter_authentication.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -29,12 +28,14 @@ namespace kwetter_authentication.Migrations
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "Avatar", "Biography", "Country", "Email", "Name", "Password", "Role", "Username" },
-                values: new object[] { 1234, null, null, null, "aron@email.com", "Aron Heesakkers", "asdf", "ADMIN", "AronKwats" });
-
-            migrationBuilder.InsertData(
-                table: "User",
-                columns: new[] { "Id", "Avatar", "Biography", "Country", "Email", "Name", "Password", "Role", "Username" },
-                values: new object[] { 12345, null, null, null, "aron@email.com", "Aron Heesakkers", "asdf", "ADMIN", "AronKwats" });
+                values: new object[,]
+                {
+                    { "feabb8fb-6d8c-48a4-b060-e02c66b25405", null, null, null, "aron@email.com", "Aron Heesakkers", "asdf", "ADMIN", "AronKwats" },
+                    { "c30fa353-d4e2-4b72-bbcf-0cd963763316", null, null, null, "jaap@email.com", "Jaap van der Meer", "asdf", "MODERATOR", "Jaapie98" },
+                    { "25853618-ef7b-44e8-aec2-bc7dae97498b", null, null, null, "sverre@email.com", "Sverre van Gompel", "asdf", "USER", "SverrieBoy" },
+                    { "61e1b100-6626-4aa0-b15b-53a1fe5503ec", null, null, null, "tim@email.com", "Tim la Haije", "asdf", "USER", "Timothy" },
+                    { "5685180c-a18e-4fc9-9d79-985f85b8fc1d", null, null, null, "dirk@email.com", "Dirk van de Waerden", "asdf", "USER", "Dirkvdw" }
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

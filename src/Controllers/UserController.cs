@@ -53,7 +53,7 @@ namespace kwetter_authentication.Controllers
       return Ok(_context.Users);
     }
 
-s
+
     [HttpPost("create")]
     public IActionResult Create(CreateRequest dto)
     {

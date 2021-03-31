@@ -1,3 +1,5 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using kwetter_authentication.Helpers;
 using kwetter_authentication.Services;
 using Microsoft.AspNetCore.Builder;
@@ -24,13 +26,17 @@ namespace kwetter_authentication
             // configure strongly typed settings object
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             var conn = Configuration.GetSection("AppSettings")["ConnectionString"];
-            
+
             services.AddDbContext<ApplicationContext>(
                 options => options.UseSqlServer(conn));
 
             services.AddCors();
-            services.AddControllers();
-            
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.WriteIndented = true;
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+            });
+
             // configure DI for application services
             services.AddScoped<IUserService, UserService>();
         }
