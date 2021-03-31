@@ -23,6 +23,5 @@
     <Folder Include="Services\" />
     <Folder Include="Helpers\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 </Project>
