@@ -64,19 +64,17 @@ namespace kwetter_authentication
                 IdentityModelEventSource.ShowPII = true;
             }
 
+            // custom jwt auth middleware
+            app.UseMiddleware<JwtMiddleware>();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-
-            // custom jwt auth middleware
-            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(x => x.MapControllers());
         }
