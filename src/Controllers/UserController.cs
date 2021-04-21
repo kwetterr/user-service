@@ -106,7 +106,7 @@ namespace kwetter_authentication.Controllers
         }
 
         [Authorize]
-        [HttpPut("/{id}")]
+        [HttpPut("/{id}/role")]
         public IActionResult UpdateRole(string id)
         {
             try
