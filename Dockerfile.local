@@ -17,6 +17,6 @@ ENV ENVIRONMENT="Development"
 
 WORKDIR /app
 COPY --from=build-env /app/out .
-EXPOSE 5000
+EXPOSE 3000
 
 ENTRYPOINT ["dotnet", "kwetter-authentication.dll"]

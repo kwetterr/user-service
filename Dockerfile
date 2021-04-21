@@ -1,8 +1,6 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
 WORKDIR /app
 
-
-
 # Restory and copy proj.
 COPY /src/*.csproj ./
 RUN dotnet restore
@@ -19,5 +17,5 @@ ENV ENVIRONMENT="Production"
 
 WORKDIR /app
 COPY --from=build-env /app/out .
-EXPOSE 5000
+EXPOSE 3000
 ENTRYPOINT ["dotnet", "kwetter-authentication.dll"]
