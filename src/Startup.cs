@@ -14,6 +14,8 @@ namespace kwetter_authentication
 {
     public class Startup
     {
+        private readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -40,14 +42,14 @@ namespace kwetter_authentication
             var myOrigins = Configuration.GetValue<string>("MyAllowedHost");
             services.AddCors(options =>
             {
-                options.AddPolicy(name: "_myAllowSpecificOrigins",
-                      builder =>
-                      {
-                          builder.WithOrigins(myOrigins)
-                          .AllowAnyHeader()
-                          .AllowAnyMethod()
-                          .AllowAnyOrigin();
-                      });
+              options.AddPolicy(name: MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins(myOrigins)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowAnyOrigin();
+                });
             });
             // configure DI for application services
             services.AddScoped<IUserService, UserService>();
@@ -66,6 +68,8 @@ namespace kwetter_authentication
 
             // custom jwt auth middleware
             app.UseMiddleware<JwtMiddleware>();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseHttpsRedirection();
 
