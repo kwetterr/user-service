@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile.local
     ports:
-      - "5000:5000"
+      - "3000:3000"
     depends_on:
       - db
   db:
