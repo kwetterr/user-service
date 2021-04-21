@@ -109,15 +109,7 @@ namespace kwetter_authentication.Controllers
         [HttpPut("/{id}/role")]
         public IActionResult UpdateRole(string id)
         {
-            try
-            {
-                _service.DeleteById(id);
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                return BadRequest(new { message = e.ToString() });
-            }
+            throw new NotImplementedException();
         }
     }
 }
