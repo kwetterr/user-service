@@ -12,10 +12,13 @@ REST-API for managing Kwetter users.
 ## Getting Started
 
 ```zsh
-docker-compose build
-docker-compose up
+docker-compose up --build
 ```
 
+## Debugging
+```zsh
+dotnet run --launch-profile kwetter_authentication
+```
 
 ### Analyze with a local SonarQube server
 The .NET CORE Docker build contains a SonarScanner (see `./Dockerfile.sonar`). This is why SonarQube needs to be started.

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Logging;
 
 namespace kwetter_authentication
 {
@@ -23,10 +24,9 @@ namespace kwetter_authentication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // configure strongly typed settings object
-            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
-            var conn = Configuration.GetSection("AppSettings")["ConnectionString"];
-
+           // configure strongly typed settings object
+           services.Configure<AppSettings>(Configuration);
+            var conn = Configuration.GetValue<string>("ConnectionString");
             services.AddDbContext<ApplicationContext>(
                 options => options.UseSqlServer(conn));
 
@@ -37,6 +37,18 @@ namespace kwetter_authentication
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
             });
 
+            var myOrigins = Configuration.GetValue<string>("MyAllowedHost");
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "_myAllowSpecificOrigins",
+                      builder =>
+                      {
+                          builder.WithOrigins(myOrigins)
+                          .AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .AllowAnyOrigin();
+                      });
+            });
             // configure DI for application services
             services.AddScoped<IUserService, UserService>();
         }
@@ -49,6 +61,7 @@ namespace kwetter_authentication
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                IdentityModelEventSource.ShowPII = true;
             }
 
             app.UseHttpsRedirection();
@@ -61,12 +74,6 @@ namespace kwetter_authentication
             {
                 endpoints.MapControllers();
             });
-
-            // global cors policy
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
 
             // custom jwt auth middleware
             app.UseMiddleware<JwtMiddleware>();

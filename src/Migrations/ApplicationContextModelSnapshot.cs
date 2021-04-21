@@ -56,45 +56,52 @@ namespace kwetter_authentication.Migrations
                         new
                         {
                             Id = "feabb8fb-6d8c-48a4-b060-e02c66b25405",
+                            Avatar = "https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425_1280.png",
+                            Biography = "Zit hier voor de fun, voor de gezelligheid, voor de humor, beetje slap ouwehoeren, als ik gemekker wil koop ik wel een geit.",
+                            Country = "NL",
                             Email = "aron@email.com",
                             Name = "Aron Heesakkers",
-                            Password = "asdf",
+                            Password = "5.iSz3oLa2gaAw3sjTUjHG7A==.cXtCflhoIMH2+jka0xFhjHZenRDlgQW5UbiK4zxaOyo=",
                             Role = "ADMIN",
                             Username = "AronKwats"
                         },
                         new
                         {
                             Id = "c30fa353-d4e2-4b72-bbcf-0cd963763316",
+                            Country = "NL",
                             Email = "jaap@email.com",
                             Name = "Jaap van der Meer",
-                            Password = "asdf",
+                            Password = "5.iSz3oLa2gaAw3sjTUjHG7A==.cXtCflhoIMH2+jka0xFhjHZenRDlgQW5UbiK4zxaOyo=",
                             Role = "MODERATOR",
                             Username = "Jaapie98"
                         },
                         new
                         {
                             Id = "25853618-ef7b-44e8-aec2-bc7dae97498b",
+                            Country = "NL",
                             Email = "sverre@email.com",
                             Name = "Sverre van Gompel",
-                            Password = "asdf",
+                            Password = "5.iSz3oLa2gaAw3sjTUjHG7A==.cXtCflhoIMH2+jka0xFhjHZenRDlgQW5UbiK4zxaOyo=",
                             Role = "USER",
                             Username = "SverrieBoy"
                         },
                         new
                         {
                             Id = "61e1b100-6626-4aa0-b15b-53a1fe5503ec",
+                            Country = "NL",
                             Email = "tim@email.com",
                             Name = "Tim la Haije",
-                            Password = "asdf",
+                            Password = "5.iSz3oLa2gaAw3sjTUjHG7A==.cXtCflhoIMH2+jka0xFhjHZenRDlgQW5UbiK4zxaOyo=",
                             Role = "USER",
                             Username = "Timothy"
                         },
                         new
                         {
                             Id = "5685180c-a18e-4fc9-9d79-985f85b8fc1d",
+                            Country = "NL",
                             Email = "dirk@email.com",
                             Name = "Dirk van de Waerden",
-                            Password = "asdf",
+                            Password = "5.iSz3oLa2gaAw3sjTUjHG7A==.cXtCflhoIMH2+jka0xFhjHZenRDlgQW5UbiK4zxaOyo=",
                             Role = "USER",
                             Username = "Dirkvdw"
                         });

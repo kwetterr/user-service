@@ -16,28 +16,31 @@ namespace kwetter_authentication.Services
     {
         private readonly AppSettings _appSettings;
         private readonly ApplicationContext _context;
+        private readonly PasswordHasher _passwordHasher;
 
         public UserService(IOptions<AppSettings> options, ApplicationContext context)
         {
             _appSettings = options.Value;
             _context = context;
+            _passwordHasher = new PasswordHasher(_appSettings);
         }
 
         public AuthenticateResponse Authenticate(AuthenticateRequest model)
         {
-            var user = _context.Users.SingleOrDefault(x => x.Username == model.Username && x.Password == model.Password);
-
-            // return null if user not found
+            var user = _context.Users.FirstOrDefault(x => x.Username == model.Username);
             if (user == null) return null;
+
+            var verified = _passwordHasher.Check(user.Password, model.Password).Verified;
+            if (!verified) return null;
 
             // authentication successful so generate jwt token
             var token = GenerateJwtToken(user);
-
             return new AuthenticateResponse(user, token);
         }
 
         public User Create(CreateRequest req)
         {
+            var hash = _passwordHasher.Hash(req.Password);
             var res = _context.Users.Add(
                 new User()
                 {
@@ -45,6 +48,7 @@ namespace kwetter_authentication.Services
                     Username = req.Username,
                     Name = req.Name,
                     Email = req.Email,
+                    Password = hash,
                     Country = req.Country,
                     Biography = req.Biography,
                     Avatar = req.Avatar,
@@ -104,7 +108,7 @@ namespace kwetter_authentication.Services
         {
             // generate token that is valid for 7 days
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var key = Encoding.ASCII.GetBytes(_appSettings.JwtSecret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),

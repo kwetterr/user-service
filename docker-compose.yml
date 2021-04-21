@@ -1,7 +1,9 @@
 ﻿version: "3.9"
 services:
   auth:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile.local
     ports:
       - "5000:5000"
     depends_on:
